@@ -47,7 +47,7 @@ namespace GestaoDeEquipamentos2
             while (Continuar)
             {
                 Console.Clear();
-                Console.WriteLine("--- Bem Vindo ---\n");
+                Console.WriteLine("    --- Bem Vindo ---\n");
                 Console.WriteLine("[1] Gerenciar Equipamentos");
                 Console.WriteLine("[2] Gerenciar Chamados");
                 Console.WriteLine("[9] Sair");
@@ -58,14 +58,14 @@ namespace GestaoDeEquipamentos2
                 {
                     case 1: MostrarSubMenuEquipamentos(); break;
                     case 2: MostrarSubMenuChamados(); break;
-                    case SAIR: Continuar = false; break;
+                    case SAIR: Console.Clear(); Continuar = false; break;
                 }
             }
         }
 
         static void MostrarSubMenuEquipamentos()
         {
-            while (Continuar)
+            while (OpcaoMenu != SAIR)
             {
                 Console.Clear();
                 Console.WriteLine("--- Equipamentos ---\n");
@@ -90,7 +90,7 @@ namespace GestaoDeEquipamentos2
 
         static void MostrarSubMenuChamados()
         {
-            while (Continuar)
+            while (OpcaoMenu != SAIR)
             {
                 Console.Clear();
                 Console.WriteLine("--- Chamados ---\n");
@@ -196,7 +196,7 @@ namespace GestaoDeEquipamentos2
 
         static string SolicitarEquipamento(bool editar)
         {
-            Console.Write($"\nInforme o id do equipamento para {(editar ? "editar" : "excluir")} ou tecle Enter para Voltar.\n=> ");
+            Console.Write($"\nInforme o id do equipamento para {(editar ? "Editar" : "Excluir")} ou tecle Enter para Voltar.\n=> ");
             return Console.ReadLine()!;
         }
 
@@ -318,7 +318,7 @@ namespace GestaoDeEquipamentos2
             do
             {
                 Console.Clear();
-                Console.WriteLine($"Confirma {(editar ? "editar" : excluir ? "excluir" : "registrar chamado para")} o equipamento\nId: {equipamento[0]} - {equipamento[1]} ?\n\n[1] Sim [2] Não\n");
+                Console.WriteLine($"Confirma {(editar ? "Editar" : excluir ? "Excluir" : "Registrar Chamado para")} o Equipamento:\n\nId: {equipamento[0]} - {equipamento[1]} ?\n\n[1] Sim [2] Não\n");
                 opcao = Console.ReadLine()!;
 
             } while (opcao != "1" && opcao != "2");
@@ -429,9 +429,12 @@ namespace GestaoDeEquipamentos2
         {
             MostrarListaChamados();
 
-            int index = ObterIndexChamado(SolicitarIdChamado());
+            int index = ObterIndexChamado(SolicitarIdChamado(true));
 
             if (!VerificarChamadoEncontrado(index))
+                return;
+
+            if (!ConfirmarChamado(ObterChamado(index), false))
                 return;
 
             MostrarListaEquipamentos();
@@ -451,9 +454,9 @@ namespace GestaoDeEquipamentos2
             MostrarMensagem("Chamado editado com sucesso!", true);
         }
 
-        static string SolicitarIdChamado()
+        static string SolicitarIdChamado(bool editar)
         {
-            Console.Write("\nInforme o id do chamado ou tecle Enter para voltar\n=> ");
+            Console.Write($"\nInforme o id para {(editar ? "Editar" : "Excluir")} o chamado ou tecle Enter para voltar.\n=> ");
             return Console.ReadLine()!;
         }
 
@@ -461,14 +464,44 @@ namespace GestaoDeEquipamentos2
         {
             MostrarListaChamados();
 
-            int index = ObterIndexChamado(SolicitarIdChamado());
+            int index = ObterIndexChamado(SolicitarIdChamado(false));
 
             if (!VerificarChamadoEncontrado(index))
+                return;
+
+            if (!ConfirmarChamado(ObterChamado(index), true))
                 return;
 
             ExcluirChamadoDaLista(index);
             MostrarMensagem("Chamado excluido com sucesso!", true);
 
+        }
+
+        static string[] ObterChamado(int index)
+        {
+            string[] chamado = new string[5];
+
+            chamado[0] = ChamadoListId[index]!.ToString()!;
+            chamado[1] = ChamadoListIdEquipamento[index]!.ToString()!;
+            chamado[2] = ChamadoListTitulo[index]!.ToString()!;
+            chamado[3] = ChamadoListDescricao[index]!.ToString()!;
+            chamado[4] = ChamadoListDataAbertura[index]!.ToString()!;
+
+            return chamado;
+        }
+
+        static bool ConfirmarChamado(string[] chamado, bool excluir)
+        {
+            string opcao;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine($"Confirma {(excluir ? "Excluir" : "Editar")} o Chamado:\n\nId: {chamado[0]} - Equipamento Id: {chamado[1]} - Título: {chamado[2]} ?\n\n[1] Sim [2] Não\n");
+                opcao = Console.ReadLine()!;
+
+            } while (opcao != "1" && opcao != "2");
+
+            return opcao == "1" ? true : false;
         }
 
         static void ExcluirChamadoDaLista(int index)
