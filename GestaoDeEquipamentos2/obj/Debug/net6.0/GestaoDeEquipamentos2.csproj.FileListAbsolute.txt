@@ -1,0 +1,15 @@
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\bin\Debug\net6.0\GestaoDeEquipamentos2.exe
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\bin\Debug\net6.0\GestaoDeEquipamentos2.deps.json
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\bin\Debug\net6.0\GestaoDeEquipamentos2.runtimeconfig.json
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\bin\Debug\net6.0\GestaoDeEquipamentos2.dll
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\bin\Debug\net6.0\GestaoDeEquipamentos2.pdb
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\GestaoDeEquipamentos2.csproj.AssemblyReference.cache
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\GestaoDeEquipamentos2.GeneratedMSBuildEditorConfig.editorconfig
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\GestaoDeEquipamentos2.AssemblyInfoInputs.cache
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\GestaoDeEquipamentos2.AssemblyInfo.cs
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\GestaoDeEquipamentos2.csproj.CoreCompileInputs.cache
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\GestaoDeEquipamentos2.dll
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\refint\GestaoDeEquipamentos2.dll
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\GestaoDeEquipamentos2.pdb
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\GestaoDeEquipamentos2.genruntimeconfig.cache
+C:\AP\Modulo_1\GestaoDeEquipamentos2\GestaoDeEquipamentos2\obj\Debug\net6.0\ref\GestaoDeEquipamentos2.dll
