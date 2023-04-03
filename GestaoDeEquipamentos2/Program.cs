@@ -35,7 +35,7 @@ namespace GestaoDeEquipamentos2
                 }
                 catch (Exception)
                 {
-                    MostrarMensagem("Algo deu errado! Tecle para continuar...", false);
+                    MostrarMensagem("Algo deu errado! Tecle para continuar...", ConsoleColor.White);
                 }
             }
         }
@@ -167,7 +167,7 @@ namespace GestaoDeEquipamentos2
         static void CadastrarEquipamento()
         {
             AdicionarNaListaEquipamentos(FormularioEquipamento());
-            MostrarMensagem("Equipamento cadastrado com sucesso!", true);
+            MostrarMensagem("Equipamento cadastrado com sucesso!", ConsoleColor.Green);
         }
 
         static void MostrarListaEquipamentos()
@@ -205,14 +205,8 @@ namespace GestaoDeEquipamentos2
             if (String.IsNullOrWhiteSpace(id))
                 return -2;
 
-            for (int index = 0; index < ListIdEquipamento.Count; index++)
-            {
-                if (ListIdEquipamento[index]!.ToString() == id)
-                {
-                    return index;
-                }
-            }
-            return -1;
+            return ListIdEquipamento.IndexOf(id);
+
         }
 
         static void EditarEquipamento()
@@ -229,7 +223,7 @@ namespace GestaoDeEquipamentos2
 
             EditarListasEquipamentos(index, FormularioEquipamento());
 
-            MostrarMensagem("Equipamento editado com sucesso!", true);
+            MostrarMensagem("Equipamento editado com sucesso!", ConsoleColor.Green);
         }
 
         static void EditarListasEquipamentos(int index, string[] formulario)
@@ -267,12 +261,7 @@ namespace GestaoDeEquipamentos2
 
         static bool VerificarSePodeExcluirEquip(string id)
         {
-            foreach (string item in ChamadoListIdEquipamento)
-            {
-                if (item == id)
-                    return false;
-            }
-            return true;
+            return !ChamadoListIdEquipamento.Contains(id);
         }
 
         static void ExcluirEquipamento()
@@ -288,7 +277,7 @@ namespace GestaoDeEquipamentos2
 
             if (!VerificarSePodeExcluirEquip(idEquipamento))
             {
-                MostrarMensagem("Não é possivel excluir equipamento com chamado cadastrado", false);
+                MostrarMensagem("Não é possivel excluir equipamento com chamado cadastrado", ConsoleColor.Red);
                 return;
             }
 
@@ -296,14 +285,14 @@ namespace GestaoDeEquipamentos2
                 return;
 
             ExcluirEquipamentoDaLista(index);
-            MostrarMensagem("Equipamento excluido com sucesso!", true);
+            MostrarMensagem("Equipamento excluido com sucesso!", ConsoleColor.Green);
         }
 
         static bool VerificarEquipamentoEncontrado(int index)
         {
             if (index == -1)
             {
-                MostrarMensagem("Equipamento não cadastrado", false);
+                MostrarMensagem("Equipamento não cadastrado", ConsoleColor.Red);
                 return false;
             }
             if (index == -2)
@@ -394,7 +383,7 @@ namespace GestaoDeEquipamentos2
             ChamadoListDescricao.Add(chamado[1]);
             ChamadoListDataAbertura.Add(chamado[2]);
 
-            MostrarMensagem("Chamado cadastrado com sucesso!", true);
+            MostrarMensagem("Chamado cadastrado com sucesso!", ConsoleColor.Green);
         }
 
         static void MostrarListaChamados()
@@ -451,7 +440,7 @@ namespace GestaoDeEquipamentos2
             ChamadoListDescricao[index] = formulario[1];
             ChamadoListDataAbertura[index] = formulario[2];
 
-            MostrarMensagem("Chamado editado com sucesso!", true);
+            MostrarMensagem("Chamado editado com sucesso!", ConsoleColor.Green);
         }
 
         static string SolicitarIdChamado(bool editar)
@@ -473,7 +462,7 @@ namespace GestaoDeEquipamentos2
                 return;
 
             ExcluirChamadoDaLista(index);
-            MostrarMensagem("Chamado excluido com sucesso!", true);
+            MostrarMensagem("Chamado excluido com sucesso!", ConsoleColor.Green);
 
         }
 
@@ -518,22 +507,14 @@ namespace GestaoDeEquipamentos2
             if (String.IsNullOrWhiteSpace(id))
                 return -2;
 
-            for (int index = 0; index < ChamadoListId.Count; index++)
-            {
-                if (ChamadoListId[index]!.ToString() == id)
-                {
-                    return index;
-                }
-            }
-            return -1;
-
+            return ChamadoListId.IndexOf(id);
         }
 
         static bool VerificarChamadoEncontrado(int index)
         {
             if (index == -1)
             {
-                MostrarMensagem("Chamado não cadastrado", false);
+                MostrarMensagem("Chamado não cadastrado", ConsoleColor.Red);
                 return false;
             }
             if (index == -2)
@@ -546,10 +527,10 @@ namespace GestaoDeEquipamentos2
 
         #region validacoes
 
-        static void MostrarMensagem(string mensagem, bool sucesso)
+        static void MostrarMensagem(string mensagem, ConsoleColor cor)
         {
             Console.Clear();
-            Console.ForegroundColor = sucesso ? ConsoleColor.Green : ConsoleColor.Red;
+            Console.ForegroundColor = cor;
             Console.WriteLine(mensagem);
             Console.ResetColor();
             Console.ReadKey();
@@ -561,13 +542,13 @@ namespace GestaoDeEquipamentos2
 
             if (!DateTime.TryParseExact(data, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dataValida))
             {
-                MostrarMensagem("Data em formato inválido", false);
+                MostrarMensagem("Data em formato inválido", ConsoleColor.Red);
                 return false;
             }
 
             else if (dataValida > DateTime.Now)
             {
-                MostrarMensagem("Data Inválida", false);
+                MostrarMensagem("Data Inválida", ConsoleColor.Red);
                 return false;
             }
 
@@ -578,7 +559,7 @@ namespace GestaoDeEquipamentos2
         {
             if (nome.Length < 6 || nome.Length >= 25)
             {
-                MostrarMensagem("O nome deve conter no mínimo 6 caracteres e no máximo 25.", false);
+                MostrarMensagem("O nome deve conter no mínimo 6 caracteres e no máximo 25.", ConsoleColor.Red);
                 return false;
             }
             return true;
@@ -590,7 +571,7 @@ namespace GestaoDeEquipamentos2
             {
                 if (ListIdEquipamento.Count == 0)
                 {
-                    MostrarMensagem("Nenhum Equipamento Cadastrado", false);
+                    MostrarMensagem("Nenhum Equipamento Cadastrado", ConsoleColor.Yellow);
                     return false;
                 }
             }
@@ -598,7 +579,7 @@ namespace GestaoDeEquipamentos2
             {
                 if (ChamadoListId.Count == 0)
                 {
-                    MostrarMensagem("Nenhum Chamado Cadastrado", false);
+                    MostrarMensagem("Nenhum Chamado Cadastrado", ConsoleColor.Yellow);
                     return false;
                 }
 
